@@ -14,7 +14,6 @@ export class Home {
   taskService = inject(Task)
   tasks$ = this.taskService.tasks$;
   field = false;
-title: any;
 
   ngOnInit() {
     console.log('ngOnInit exécuté')
@@ -25,7 +24,7 @@ title: any;
     this.field = false;
   }
 
-  setField() {
+  displayField() {
     this.field = true;
   }
 }

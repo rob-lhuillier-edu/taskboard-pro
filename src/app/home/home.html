@@ -12,6 +12,13 @@
     <p>Chargement des tâches...</p>
 }
 
-<button (click)="addTask('Nouvelle tâche')">Ajouter une tâche</button>
+
+<button (click)="displayField()" >Ajouter une tâche</button>
+@if (this.field) {
+    <label for="title"></label>
+    <input #title type="text" id="title">
+<button (click)="addTask(title.value)">OK</button>
+
+}
 
 <app-counter></app-counter>
