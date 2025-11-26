@@ -8,14 +8,19 @@ import { Component } from '@angular/core';
 })
 export class Counter {
   count: number;
+  intervalId!: number;
 
   constructor() {
     this.count = 0;
   }
 
   ngOnInit() {
-    setInterval(() => {
+    this.intervalId = setInterval(() => {
       this.count++;
     }, 500);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
   }
 }

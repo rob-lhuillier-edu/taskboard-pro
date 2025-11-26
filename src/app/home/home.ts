@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { AsyncPipe } from '@angular/common'
 import { Task } from '../core/services/task';
 import { Counter } from '../counter/counter';
@@ -10,13 +10,22 @@ import { Counter } from '../counter/counter';
   styleUrl: './home.scss',
 })
 export class Home {
-  tasks$!: ReturnType<Task['getTasks']>;
 
-  constructor(private taskService: Task) {
-    this.tasks$ = this.taskService.getTasks();
-  }
+  taskService = inject(Task)
+  tasks$ = this.taskService.tasks$;
+  field = false;
+title: any;
 
   ngOnInit() {
     console.log('ngOnInit exécuté')
+  }
+
+  addTask(title: string) {
+    this.taskService.addTask(title);
+    this.field = false;
+  }
+
+  setField() {
+    this.field = true;
   }
 }
