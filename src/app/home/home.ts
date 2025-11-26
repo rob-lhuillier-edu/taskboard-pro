@@ -2,6 +2,8 @@ import { Component, inject, input } from '@angular/core';
 import { AsyncPipe } from '@angular/common'
 import { Task } from '../core/services/task';
 import { Counter } from '../counter/counter';
+import { FormControl } from '@angular/forms';
+import { ChildActivationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -20,8 +22,8 @@ export class Home {
   }
 
   addTask(title: string) {
-    this.taskService.addTask(title);
-    this.field = false;
+      this.taskService.addTask(title);
+      this.field = false;
   }
 
   displayField() {
