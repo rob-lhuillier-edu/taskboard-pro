@@ -1,6 +1,6 @@
 import { Component, inject, input } from '@angular/core';
 import { AsyncPipe } from '@angular/common'
-import { TaskService } from '../../core/services/task';
+import { TaskService } from '../../core/services/taskService';
 import { Counter } from '../../counter/counter';
 import { TaskForm } from './task-form/task-form';
 import { FormControl } from '@angular/forms';
