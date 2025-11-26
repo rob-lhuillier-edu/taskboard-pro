@@ -1,3 +1,14 @@
-<h2>Accueil</h2>​
+<h2>Liste des taches</h2>​
 
-    <p>Bienvenue sur la page d’accueil.</p>​
+@if (tasks$ | async; as tasks) {
+    <ul>
+        @for (t of tasks; track t.id) {
+            <li>
+                {{ t.title }}
+            </li>
+        }
+    </ul>
+} @else {
+    <p>Chargement des tâches...</p>
+}
+<p>Temps écoulé : {{ count / 2 }} secondes</p>
