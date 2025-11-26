@@ -1,32 +1,11 @@
-import { Component, inject, input } from '@angular/core';
-import { AsyncPipe } from '@angular/common'
-import { Task } from '../core/services/task';
-import { Counter } from '../counter/counter';
-import { FormControl } from '@angular/forms';
-import { ChildActivationEnd } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
-  imports: [AsyncPipe, Counter],
+  imports: [],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
 export class Home {
 
-  taskService = inject(Task)
-  tasks$ = this.taskService.tasks$;
-  field = false;
-
-  ngOnInit() {
-    console.log('ngOnInit exécuté')
-  }
-
-  addTask(title: string) {
-      this.taskService.addTask(title);
-      this.field = false;
-  }
-
-  displayField() {
-    this.field = true;
-  }
 }

@@ -1,0 +1,22 @@
+<h2>Liste des taches</h2>​
+
+@if (tasks$ | async; as tasks) {
+    <ul>
+        @for (t of tasks; track t.id) {
+            <li>
+                <p>{{ t.title }}</p>
+                <button (click)="removeTask(t.id)">Supprimer</button>
+            </li>
+        }
+    </ul>
+} @else {
+    <p>Chargement des tâches...</p>
+}
+
+
+<button (click)="displayField()" >Ajouter une tâche</button>
+@if (this.field == true) {
+<app-task-form></app-task-form>
+}
+
+<app-counter></app-counter>

@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class Task {
+export class TaskService {
   private tasks = [
     { id: 1, title: 'Préparer le cours angular'},
     { id: 2, title: 'Relire le module RxJs'},
@@ -23,6 +23,11 @@ export class Task {
   }
 
   getTasks() {
-    return of(this.tasks).pipe(delay(1000))
+    return of(this.tasks).pipe(delay(1000));
+  }
+
+  removeTask(id: number) {
+    this.tasks = this.tasks.filter(t => t.id !== id);
+    this.taskSubject.next(this.tasks);
   }
 }
