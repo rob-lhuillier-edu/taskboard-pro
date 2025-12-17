@@ -5,6 +5,7 @@
         @for (t of tasks; track t.id) {
             <li>
                 <p>{{ t.title }}</p>
+                <button (click)="highlight(t.id)">Mettre en avant</button>
                 <button (click)="removeTask(t.id)">Supprimer</button>
             </li>
         }
@@ -18,5 +19,7 @@
 @if (this.field == true) {
 <app-task-form></app-task-form>
 }
+
+<div #highlightContainer></div>
 
 <app-counter></app-counter>

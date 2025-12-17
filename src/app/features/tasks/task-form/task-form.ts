@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { TaskService } from '../../../core/services/taskService'
 
 @Component({
@@ -9,10 +9,12 @@ import { TaskService } from '../../../core/services/taskService'
 })
 export class TaskForm {
   taskService = inject(TaskService)
+  closeForm = output<void>();
 
   addTask(title: string) {
     if (title) {
       this.taskService.addTask(title);
+      this.closeForm.emit();
     }
   }
 }
