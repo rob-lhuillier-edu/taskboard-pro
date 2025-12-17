@@ -41,4 +41,8 @@ export class Tasks {
 
     ref.instance.title = this.taskService.getTitle(id);
   }
+
+  endTask(id: number) {
+    this.taskService.endTast(id);
+  }
 }

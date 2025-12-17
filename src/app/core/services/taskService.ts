@@ -40,4 +40,11 @@ export class TaskService {
     this.tasks = this.tasks.filter(t => t.id !== id);
     this.taskSubject.next(this.tasks);
   }
+
+  endTast(id: number) {
+    const toEnd = this.tasks.find(t => t.id === id);
+    if(toEnd) {
+      toEnd.completed = !toEnd.completed;
+    }
+  }
 }

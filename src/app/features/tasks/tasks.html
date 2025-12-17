@@ -4,9 +4,14 @@
     <ul>
         @for (t of tasks; track t.id) {
             <li>
-                <p>{{ t.title }}</p>
+                @if (t.completed) {
+                    <p><s>{{ t.title }}</s></p>
+                } @else {
+                    <p>{{ t.title }}</p>
+                }
                 <button (click)="highlight(t.id)">Mettre en avant</button>
                 <button (click)="removeTask(t.id)">Supprimer</button>
+                <button (click)="endTask(t.id)">Terminer</button>
             </li>
         }
     </ul>
