@@ -1,4 +1,10 @@
 <h2>Liste des taches</h2>​
+<label for="filterByStatus">Filtrer par...</label>
+<select name="status" (change)="onSelected($event)" id="status-select">
+    <option value="">---selectionner un statut---</option>
+    <option value="complete">Terminée</option>
+    <option value="incomplète">En cours</option>
+</select>
 
 @if (tasks$ | async; as tasks) {
     <ul>

@@ -32,6 +32,11 @@ export class TaskService {
     this.taskSubject.next(this.tasks);
   }
 
+  getTaskId(title: string) {
+    const task = this.tasks.find(t => t.title === title);
+    return task
+  }
+
   getTasks() {
     return of(this.tasks).pipe(delay(1000));
   }
@@ -41,10 +46,13 @@ export class TaskService {
     this.taskSubject.next(this.tasks);
   }
 
-  endTast(id: number) {
+  endTask(id: number) {
     const toEnd = this.tasks.find(t => t.id === id);
     if(toEnd) {
       toEnd.completed = !toEnd.completed;
     }
+  }
+  clearTasks() {
+    this.tasks = new Array()
   }
 }

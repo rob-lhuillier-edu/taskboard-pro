@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Counter } from './counter';
+import { provideRouter } from '@angular/router';
 
 describe('Counter', () => {
   let component: Counter;
@@ -8,9 +9,12 @@ describe('Counter', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Counter]
+      imports: [Counter],
+      providers: [
+        provideRouter([])
+      ],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(Counter);
     component = fixture.componentInstance;
