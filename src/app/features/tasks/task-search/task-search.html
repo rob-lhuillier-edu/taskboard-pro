@@ -1,0 +1,13 @@
+<div class="search-container">
+  <label for="search-input">Rechercher une tâche</label>
+  <input 
+    id="search-input"
+    type="text" 
+    placeholder="Saisir un mot clé"
+    [formControl]="searchControl"
+  />
+  
+  @if (searchControl.value) {
+    <button (click)="clearSearch()" type="button">Effacer</button>
+  }
+</div>

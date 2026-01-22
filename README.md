@@ -35,8 +35,8 @@
 
 #### 6. Commandes importantes
 ```bash
-ng test                    # Lancer les tests
-ng test --code-coverage    # Avec rapport de couverture
+ng test                   
+ng test --code-coverage  
 ```
 
 #### 7. Code Coverage atteint
@@ -51,9 +51,3 @@ ng test --code-coverage    # Avec rapport de couverture
 | Difficulté | Solution trouvée |
 |------------|------------------|
 | Le test de taks renvoyait systematiquement un timeout | Passage du test en synchrone |
-
-#### 9. Points à approfondir
-- [ ] Tests d'intégration
-- [ ] Tests E2E avec Cypress
-- [ ] Mocking avancé pour HttpClient
-- [ ] Tests de services asynchrones

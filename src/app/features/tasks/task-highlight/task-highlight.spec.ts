@@ -19,9 +19,7 @@ fdescribe('TaskHighlight Component', () => {
   });
 
   it('devrait afficher le titre passé en @Input', () => {
-    // ARRANGE : Définir la valeur de @Input
-    component.title = 'Apprendre Angular';
-    
+
     // ACT : Déclencher la détection de changements
     fixture.detectChanges();
     
@@ -31,7 +29,4 @@ fdescribe('TaskHighlight Component', () => {
     expect(p.textContent).toBe('Apprendre Angular');
   });
 
-  it('devrait avoir un titre vide par défaut', () => {
-    expect(component.title).toBe('');
-  });
 });

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export interface TaskItem {
   id: number;
@@ -19,11 +19,45 @@ export class TaskService {
   ];
 
   private taskSubject = new BehaviorSubject<TaskItem[]>(this.tasks);
-  tasks$ = this.taskSubject.asObservable();
+  private searchSubject = new BehaviorSubject<string>('');
+  private filterSubject = new BehaviorSubject<'all' | 'complete' | 'incomplete'>('all');
+  tasks$ = combineLatest([
+    this.taskSubject.asObservable(),
+    this.searchSubject.asObservable(),
+    this.filterSubject.asObservable()
+  ]).pipe(
+    map(([tasks, searchTerm, filter]) => {
+      let filteredTasks = tasks;
+      switch (filter) {
+        case 'complete':
+          filteredTasks = tasks.filter(t => t.completed === true);
+          break;
+        case 'incomplete':
+          filteredTasks = tasks.filter(t => t.completed === false);
+          break;
+        default:
+          filteredTasks = tasks;
+      }
+      if (searchTerm.trim()) {
+        filteredTasks = filteredTasks.filter(t =>
+          t.title.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      }
 
-  getTitle(id: number): string {
-    const task = this.tasks.find(t => t.id === id);
-    return task ? task.title : '';
+      return filteredTasks;
+    })
+  );
+
+  setSearchTerm(term: string) {
+    this.searchSubject.next(term);
+  }
+
+  setFilter(filter: 'all' | 'complete' | 'incomplete') {
+    this.filterSubject.next(filter);
+  }
+
+  getTaskById(id: number) : TaskItem | undefined {
+    return this.tasks.find(t => t.id === id)
   }
 
   addTask(title: string) {
@@ -32,27 +66,30 @@ export class TaskService {
     this.taskSubject.next(this.tasks);
   }
 
-  getTaskId(title: string) {
-    const task = this.tasks.find(t => t.title === title);
-    return task
-  }
-
-  getTasks() {
-    return of(this.tasks).pipe(delay(1000));
-  }
-
   removeTask(id: number) {
     this.tasks = this.tasks.filter(t => t.id !== id);
     this.taskSubject.next(this.tasks);
   }
 
-  endTask(id: number) {
-    const toEnd = this.tasks.find(t => t.id === id);
-    if(toEnd) {
-      toEnd.completed = !toEnd.completed;
-    }
+  setComplete(id: number) {
+    this.tasks = this.tasks.map(t =>
+      t.id === id ? { ...t, completed: true} : t
+    );
+    this.taskSubject.next(this.tasks);
   }
+
+  getByTitle(title: string): TaskItem | undefined {
+    const task = this.tasks.find(t => t.title === title)
+    return task
+  }
+
   clearTasks() {
     this.tasks = new Array()
+  }
+  getComplete() {
+    return this.tasks.filter(t => t.completed === true)
+  }
+  getIncomplete() {
+    return this.tasks.filter(t => t.completed === false)
   }
 }

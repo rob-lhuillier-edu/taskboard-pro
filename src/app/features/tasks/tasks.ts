@@ -1,17 +1,15 @@
-import { Component, inject, input, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy, ViewChild, ViewContainerRef } from '@angular/core';
 import { AsyncPipe } from '@angular/common'
 import { TaskService, TaskItem } from '../../core/services/taskService';
 import { Counter } from '../../counter/counter';
 import { TaskForm } from './task-form/task-form';
 import { TaskHighlight } from './task-highlight/task-highlight';
-import { map } from 'rxjs/operators';
-
-import { FormControl } from '@angular/forms';
-import { ChildActivationEnd } from '@angular/router';
+import { TaskSearch } from './task-search/task-search';
 
 @Component({
   selector: 'app-tasks',
-  imports: [AsyncPipe, Counter, TaskForm],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [AsyncPipe, Counter, TaskForm, TaskSearch, TaskHighlight],
   templateUrl: './tasks.html',
   styleUrl: './tasks.scss',
 })
@@ -20,12 +18,29 @@ export class Tasks {
   tasks$ = this.taskService.tasks$;
   field = false;
   selectedStatus?: boolean;
-
-  @ViewChild('highlightContainer', { read: ViewContainerRef })
-  container!: ViewContainerRef;
+  searchTerm: string = '';
+  highlightedTask: TaskItem | null = null;
+  showHighlight = false;
 
   ngOnInit() {
     console.log('ngOnInit exécuté')
+  }
+
+  highlight(id: number) {
+    const task = this.taskService.getTaskById(id);
+    if (task) {
+      this.highlightedTask = task;
+      this.showHighlight = true;
+    }
+  }
+
+  closeHighlight() {
+    this.showHighlight = false;
+    this.highlightedTask = null;
+  }
+
+  onSearchChange(value: string) {
+    this.taskService.setSearchTerm(value);
   }
 
   displayField() {
@@ -36,30 +51,12 @@ export class Tasks {
     this.taskService.removeTask(id);
   }
 
-  highlight(id: number) {
-    this.container.clear();
-
-    const ref = this.container.createComponent(TaskHighlight);
-
-    ref.instance.title = this.taskService.getTitle(id);
-  }
-
   endTask(id: number) {
-    this.taskService.endTask(id);
+    this.taskService.setComplete(id);
   }
 
   onSelected(event: Event) {
-    this.tasks$ = this.taskService.tasks$;
-    const value = (event.target as HTMLSelectElement).value;
-    if (value === 'complete') {
-      this.tasks$ = this.tasks$.pipe(
-        map(tasks => tasks.filter(t => t.completed))
-      )
-    };
-    if (value === 'incomplete') {
-      this.tasks$ = this.tasks$.pipe(
-        map(tasks => tasks.filter(t => !t.completed))
-      )
-    };
+    const value = (event.target as HTMLSelectElement).value as 'all' | 'complete' | 'incomplete';
+    this.taskService.setFilter(value);
   }
 }

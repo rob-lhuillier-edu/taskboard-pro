@@ -49,8 +49,8 @@ it('devrait afficher le titre des tâches', () => {
 });
 it('devrait filtrer les tâches complétées', () => {
   service.addTask('Tâche 1');
-  const task = service.getTaskId('Tâche 1')
-  if (task) {service.endTask(task.id)}
+  const task = service.getByTitle('Tâche 1')
+  if (task) {service.setComplete(task.id)}
   service.addTask('Tâche 2');
 
   component.onSelected({ target: { value: 'complete' } } as any);

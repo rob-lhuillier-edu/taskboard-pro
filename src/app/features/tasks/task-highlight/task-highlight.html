@@ -1,4 +1,14 @@
-<div class="task-highlight">
+@if (task) {
+  <div class="task-highlight">
     <h3>Tâche mise en avant</h3>
-    <p>{{ title }}</p>
-</div>  
+
+    <p>{{ task.title }}</p>
+
+    <p>
+      Status :
+      {{ task.completed ? 'Complétée' : 'Incomplète' }}
+    </p>
+
+    <button (click)="onClose()">Fermer</button>
+  </div>
+}
