@@ -1,24 +1,17 @@
 /* App Component Styles - Navigation & Layout */
 
 // Colors
-$primary: #2b6cb0;
 $primary-light: #3b82f6;
 $primary-dark: #1e40af;
 $secondary: #ed8936;
-$muted: #6b7280;
-$bg: #f8fafc;
 $border: #e5e7eb;
-$success: #10b981;
-$danger: #ef4444;
-$warning: #f59e0b;
 $white: #ffffff;
 $text: #111827;
+$muted: #6b7280;
 
 // Utilities
 $radius: 8px;
 $transition: 300ms ease-in-out;
-$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 $shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 $shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 
@@ -31,7 +24,6 @@ nav {
   z-index: 1000;
   padding: 0;
   margin: 0;
-  border: none;
 
   a {
     display: inline-block;
@@ -74,13 +66,6 @@ nav {
       }
     }
   }
-
-  // Separator styling
-  & > a + a::before {
-    content: '|';
-    margin-right: 12px;
-    opacity: 0.5;
-  }
 }
 
 /* Main Content Area */
@@ -116,7 +101,6 @@ main {
     font-size: 0.95rem;
     color: $text;
     font-weight: 600;
-    text-transform: none;
   }
 
   input,
@@ -135,7 +119,6 @@ main {
       outline: none;
       border-color: $primary-light;
       box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-      background: $white;
     }
 
     &::placeholder {
@@ -157,7 +140,7 @@ main {
   }
 
   .error {
-    color: $danger;
+    color: #ef4444;
     font-size: 0.85rem;
     margin-top: 4px;
     font-weight: 500;
@@ -178,10 +161,7 @@ main {
   cursor: pointer;
   transition: all $transition;
   user-select: none;
-  text-transform: none;
   white-space: nowrap;
-  position: relative;
-  overflow: hidden;
 
   &-primary {
     background: linear-gradient(135deg, $primary-light 0%, $primary-dark 100%);
@@ -198,10 +178,8 @@ main {
     }
 
     &:disabled {
-      background: lighten($primary, 30%);
-      box-shadow: none;
-      cursor: not-allowed;
       opacity: 0.6;
+      cursor: not-allowed;
     }
   }
 
@@ -232,7 +210,7 @@ main {
   }
 
   &-danger {
-    background: linear-gradient(135deg, $danger 0%, darken($danger, 10%) 100%);
+    background: linear-gradient(135deg, #ef4444 0%, darken(#ef4444, 10%) 100%);
     color: $white;
     box-shadow: $shadow-md;
 
@@ -243,18 +221,7 @@ main {
   }
 
   &-success {
-    background: linear-gradient(135deg, $success 0%, darken($success, 10%) 100%);
-    color: $white;
-    box-shadow: $shadow-md;
-
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: $shadow-lg;
-    }
-  }
-
-  &-warning {
-    background: linear-gradient(135deg, $warning 0%, darken($warning, 10%) 100%);
+    background: linear-gradient(135deg, #10b981 0%, darken(#10b981, 10%) 100%);
     color: $white;
     box-shadow: $shadow-md;
 
@@ -276,14 +243,6 @@ main {
   gap: 12px;
   align-items: center;
   flex-wrap: wrap;
-
-  &.center {
-    justify-content: center;
-  }
-
-  &.between {
-    justify-content: space-between;
-  }
 }
 
 .center {
@@ -292,61 +251,8 @@ main {
   align-items: center;
 }
 
-.grid {
-  display: grid;
-  gap: 1.5rem;
-
-  &-cols-2 {
-    grid-template-columns: repeat(2, 1fr);
-
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  &-cols-3 {
-    grid-template-columns: repeat(3, 1fr);
-
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
-  }
-}
-
-/* Text Utilities */
-.text-center { text-align: center; }
-.text-muted { color: $muted; }
-.text-primary { color: $primary-light; }
-.text-success { color: $success; }
-.text-danger { color: $danger; }
-.text-warning { color: $warning; }
-
-.text-bold { font-weight: 700; }
-.text-semi { font-weight: 600; }
-
-/* Spacing Utilities */
-.p-0 { padding: 0; }
-.p-1 { padding: 0.5rem; }
-.p-2 { padding: 1rem; }
-.p-3 { padding: 1.5rem; }
-.p-4 { padding: 2rem; }
-
-.m-0 { margin: 0; }
-.m-1 { margin: 0.5rem; }
-.m-2 { margin: 1rem; }
-.m-3 { margin: 1.5rem; }
-.m-auto { margin: 0 auto; }
-
 /* Responsive */
 @media (max-width: 768px) {
-  .container {
-    padding: 0 12px;
-  }
-
-  .btn {
-    width: 100%;
-  }
-
   nav a {
     padding: 12px 16px;
     font-size: 0.9rem;

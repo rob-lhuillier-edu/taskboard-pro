@@ -1,16 +1,10 @@
 
-<nav style="padding:.5rem; border-bottom:1px solid #ddd;">​
+<nav>
+  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Accueil</a>
+  <a routerLink="/about" routerLinkActive="active">À propos</a>
+  <a routerLink="/tasks" routerLinkActive="active">Tâches</a>
+</nav>
 
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Accueil</a> |​
-
-      <a routerLink="/about" routerLinkActive="active">À propos</a>​ |
-
-      <a routerLink="/tasks" routerLinkActive="active">Tâches</a>​
-
-</nav>​
-
-<main style="padding:1rem;">​
-
+<main>
   <router-outlet></router-outlet>
-
 </main>
