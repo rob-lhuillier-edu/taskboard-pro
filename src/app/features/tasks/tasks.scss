@@ -17,6 +17,12 @@ h2 {
   margin-bottom: 1.5rem;
 }
 
+section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
 label {
   display: block;
   font-weight: 600;

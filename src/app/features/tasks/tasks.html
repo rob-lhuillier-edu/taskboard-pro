@@ -1,41 +1,46 @@
-<h2>Liste des taches</h2>​
 
-<app-task-search></app-task-search>
-<label for="filterByStatus">Filtrer par...</label>
-<select name="status" (change)="onSelected($event)" id="status-select">
-    <option value="">---selectionner un statut---</option>
-    <option value="complete">Terminée</option>
-    <option value="incomplete">En cours</option>
-</select>
+<section>
+<div>
 
-@if (tasks$ | async; as tasks) {
+    <h2>Liste des taches</h2>​
+
+    <app-task-search></app-task-search>
+    <label for="filterByStatus">Filtrer par...</label>
+    <select name="status" (change)="onSelected($event)" id="status-select">
+        <option value="">---selectionner un statut---</option>
+        <option value="complete">Terminée</option>
+        <option value="incomplete">En cours</option>
+    </select>
+
+    @if (tasks$ | async; as tasks) {
     <ul>
         @for (t of tasks; track t.id) {
-            <li>
-                @if (t.completed) {
-                    <p><s>{{ t.title }}</s></p>
-                } @else {
-                    <p>{{ t.title }}</p>
-                }
-                <button (click)="highlight(t.id)">Mettre en avant</button>
-                <button (click)="removeTask(t.id)">Supprimer</button>
-                <button (click)="endTask(t.id)">Terminer</button>
-            </li>
+        <li>
+            @if (t.completed) {
+            <p><s>{{ t.title }}</s></p>
+            } @else {
+            <p>{{ t.title }}</p>
+            }
+            <button (click)="highlight(t.id)">Mettre en avant</button>
+            <button (click)="removeTask(t.id)">Supprimer</button>
+            <button (click)="endTask(t.id)">Terminer</button>
+        </li>
         }
     </ul>
-} @else {
+    } @else {
     <p>Chargement des tâches...</p>
-}
+    }
+</div>
+<div>
+    <button (click)="displayField()">Ajouter une tâche</button>
+    @if (this.field == true) {
+    <app-task-form></app-task-form>
+    }
 
+    @if (showHighlight && highlightedTask) {
+    <app-task-highlight [task]="highlightedTask" (close)="closeHighlight()" />
+    }
 
-<button (click)="displayField()" >Ajouter une tâche</button>
-@if (this.field == true) {
-<app-task-form></app-task-form>
-}
+</div>
 
-@if (showHighlight && highlightedTask) {
-  <app-task-highlight
-    [task]="highlightedTask"
-    (close)="closeHighlight()"
-  />
-}
+</section>
