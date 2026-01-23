@@ -1,63 +1,68 @@
-<<<<<<< HEAD
-# taskboard-pro
-=======
 # TaskBoardPro
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.12.
+## Caractéristiques d'Angular
 
-## Development server
+- **SPA**
+- **Typage statique** : Typescript natiuf, permettant de détecter une grande partie des erreurs avant l'exécution. En revanche, le typescript doit être transpilé avant exécution dans le navigateur.
+- **Structure d'un projet Angular** : 
+Cette organisation n'est pas  obligatoire mais c'est une convention
+```
+taskboard-pro/
+├── src/
+│   ├── app/
+│   │   ├── app.component.ts      // Composant racine
+│   │   ├── app.component.html    // Template
+│   │   ├── app.component.css     // Styles
+│   │   ├── app.routes.ts         // Configuration routing
+│   │   └── app.config.ts         // Configuration app
+│   ├── index.html                // Point d'entrée HTML
+│   └── main.ts                   // Point d'entrée TypeScript
+├── angular.json                  // Configuration Angular CLI
+├── package.json                  // Dépendances npm
+└── tsconfig.json                 // Configuration TypeScript
+```
+- **Les composant** sont des briques indé&pendante, avec leur propre code, template et style :
+```
+src/app/header/
+├── heade.ts      // Logique TypeScript
+├── header.html    // Template HTML
+├── header.css     // Styles CSS
+└── header.spec.ts // Tests unitaires
+```
 
-To start a local development server, run:
+- **Piliers du Angular moderne**: TypeScript, Standalone components, structure standardisée.
 
-```bash
+-**Les hooks** : Méthodes appelées automatiquement à différentes moments du cycle de vie d'un composant
+|Hook  |	Quand ?|	Usage|
+|:-----|:--------------|:------------|
+|ngOnInit()	|Après création du composant	|Initialisation, appels HTTP, abonnements|
+|ngOnDestroy() |	Juste avant destruction|	Nettoyage, unsubscribe, clearInterval|
+|ngOnChanges()|	Quand un @Input change|	Réagir aux changements d'@Input|
+|ngDoCheck()|	À chaque détection de changement|	Détection personnalisée (rare)|
+|ngAfterViewInit()|	Après initialisation de la vue	|Accéder aux éléments DOM via @ViewChild|
+|ngAfterViewChecked()|	Après chaque vérification de la vue|	Vérifications post-rendu (rare)|
+|ngAfterContentInit()	|Après projection du contenu	|Accéder au contenu projeté (ng-content)|
+|ngAfterContentChecked()|	Après chaque vérification du contenu|	Vérifications du contenu projeté (rare)|
+
+-**Routing**: Permet à Angular d'afficher la bonne page selon l'URL sans recharger l'application (gestion coté client)
+## Commandes:
+- **Créer un projet Angular** :
+```
+ng new taskboard-pro --routing --style=css
+cd taskboard-pro
 ng serve
 ```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+- **Générer des composants** :
 ```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
+ng generate component <nom>
 ```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
+- **Créer un composant** :
 ```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+ng generate component header
+# ou plus court :
+ng g c header
 ```
+## Definitions
 
-## Running end-to-end tests
+- **SPA** : Single Page Application, application reposant sur un chanrgement de page unique, dont lala vue se met à jour coté client. Permet une navigation plus fluide, une modularité du code permettant une réutilisation des composants et de limiter les aller-retours coté serveur.
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
->>>>>>> 53fe677 (initial commit)
