@@ -1,1 +1,415 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global Styles - Modern Design System */
+
+// Color Palette
+$colors: (
+  primary: #2b6cb0,
+  primary-light: #3b82f6,
+  primary-dark: #1e40af,
+  secondary: #ed8936,
+  success: #10b981,
+  warning: #f59e0b,
+  danger: #ef4444,
+  info: #06b6d4,
+  muted: #6b7280,
+  light: #f3f4f6,
+  lighter: #f9fafb,
+  border: #e5e7eb,
+  white: #ffffff,
+  text: #111827,
+  text-secondary: #4b5563
+);
+
+// Typography
+$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica Neue, Arial, sans-serif;
+$font-mono: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+
+// Spacing
+$spacing-unit: 8px;
+$spacing-xs: $spacing-unit * 0.5;
+$spacing-sm: $spacing-unit;
+$spacing-md: $spacing-unit * 2;
+$spacing-lg: $spacing-unit * 3;
+$spacing-xl: $spacing-unit * 4;
+$spacing-2xl: $spacing-unit * 6;
+
+// Border Radius
+$radius-sm: 4px;
+$radius-md: 8px;
+$radius-lg: 12px;
+$radius-full: 9999px;
+
+// Transitions
+$transition-fast: 150ms ease-in-out;
+$transition-base: 300ms ease-in-out;
+$transition-slow: 500ms ease-in-out;
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+$shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+// Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+/* Global Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: $font-stack;
+  background: linear-gradient(135deg, map-get($colors, lighter) 0%, #f0f4f8 100%);
+  color: map-get($colors, text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: $spacing-md;
+  color: map-get($colors, text);
+  letter-spacing: -0.5px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  
+  @media (max-width: $breakpoint-sm) {
+    font-size: 1.875rem;
+  }
+}
+
+h2 {
+  font-size: 2rem;
+  
+  @media (max-width: $breakpoint-sm) {
+    font-size: 1.5rem;
+  }
+}
+
+h3 {
+  font-size: 1.5rem;
+  
+  @media (max-width: $breakpoint-sm) {
+    font-size: 1.25rem;
+  }
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+h5 {
+  font-size: 1.125rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+p {
+  margin-bottom: $spacing-md;
+  color: map-get($colors, text-secondary);
+  
+  &.lead {
+    font-size: 1.125rem;
+    color: map-get($colors, text);
+  }
+}
+
+a {
+  color: map-get($colors, primary-light);
+  text-decoration: none;
+  transition: color $transition-fast;
+  
+  &:hover {
+    color: map-get($colors, primary-dark);
+    text-decoration: underline;
+  }
+}
+
+/* Form Elements */
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: $spacing-sm $spacing-md;
+  border: 2px solid map-get($colors, border);
+  border-radius: $radius-md;
+  background-color: map-get($colors, white);
+  color: map-get($colors, text);
+  transition: all $transition-base;
+  
+  &:focus {
+    outline: none;
+    border-color: map-get($colors, primary-light);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    background-color: map-get($colors, white);
+  }
+  
+  &::placeholder {
+    color: map-get($colors, muted);
+  }
+  
+  &:disabled {
+    background-color: map-get($colors, light);
+    color: map-get($colors, muted);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: $font-stack;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: $spacing-xs;
+  color: map-get($colors, text);
+  font-size: 0.95rem;
+}
+
+/* Buttons */
+button,
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-lg;
+  border: none;
+  border-radius: $radius-md;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all $transition-fast;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width $transition-fast, height $transition-fast;
+  }
+  
+  &:active:before {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+.btn-primary,
+button[type="submit"] {
+  background: linear-gradient(135deg, map-get($colors, primary-light) 0%, map-get($colors, primary-dark) 100%);
+  color: map-get($colors, white);
+  box-shadow: $shadow-md;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  &:disabled {
+    background: map-get($colors, light);
+    color: map-get($colors, muted);
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+}
+
+.btn-secondary {
+  background-color: map-get($colors, secondary);
+  color: map-get($colors, white);
+  box-shadow: $shadow-md;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+    filter: brightness(1.1);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: map-get($colors, primary-light);
+  border: 2px solid map-get($colors, primary-light);
+  
+  &:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+    transform: translateY(-1px);
+  }
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: map-get($colors, white);
+  box-shadow: $shadow-md;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+.btn-success {
+  background: linear-gradient(135deg, map-get($colors, success) 0%, #059669 100%);
+  color: map-get($colors, white);
+  box-shadow: $shadow-md;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+/* Lists */
+ul, ol {
+  margin-bottom: $spacing-lg;
+  padding-left: $spacing-2xl;
+  
+  li {
+    margin-bottom: $spacing-md;
+    color: map-get($colors, text-secondary);
+    
+    &::marker {
+      color: map-get($colors, primary-light);
+      font-weight: 600;
+    }
+  }
+}
+
+/* Utility Classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+  
+  @media (max-width: $breakpoint-md) {
+    padding: 0 $spacing-md;
+  }
+}
+
+.flex {
+  display: flex;
+  
+  &-center {
+    align-items: center;
+    justify-content: center;
+  }
+  
+  &-between {
+    justify-content: space-between;
+  }
+  
+  &-col {
+    flex-direction: column;
+  }
+}
+
+.grid {
+  display: grid;
+  gap: $spacing-lg;
+  
+  &-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+    
+    @media (max-width: $breakpoint-sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  &-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+    
+    @media (max-width: $breakpoint-sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.text-center { text-align: center; }
+.text-muted { color: map-get($colors, muted); }
+.text-primary { color: map-get($colors, primary-light); }
+.text-success { color: map-get($colors, success); }
+.text-danger { color: map-get($colors, danger); }
+
+.bg-light { background-color: map-get($colors, light); }
+.bg-lighter { background-color: map-get($colors, lighter); }
+.bg-white { background-color: map-get($colors, white); }
+
+.p-0 { padding: 0; }
+.p-1 { padding: $spacing-sm; }
+.p-2 { padding: $spacing-md; }
+.p-3 { padding: $spacing-lg; }
+.p-4 { padding: $spacing-xl; }
+
+.m-0 { margin: 0; }
+.m-1 { margin: $spacing-sm; }
+.m-2 { margin: $spacing-md; }
+.m-3 { margin: $spacing-lg; }
+
+.rounded { border-radius: $radius-md; }
+.rounded-lg { border-radius: $radius-lg; }
+.rounded-full { border-radius: $radius-full; }
+
+.shadow { box-shadow: $shadow-md; }
+.shadow-lg { box-shadow: $shadow-lg; }
+
+.transition { transition: all $transition-base; }
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: map-get($colors, light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: map-get($colors, border);
+  border-radius: $radius-md;
+  
+  &:hover {
+    background: map-get($colors, muted);
+  }
+}

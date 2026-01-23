@@ -1,0 +1,181 @@
+/* Counter Component Styles */
+
+$primary-light: #3b82f6;
+$primary-dark: #1e40af;
+$success: #10b981;
+$border: #e5e7eb;
+$text: #111827;
+$white: #ffffff;
+$light: #f3f4f6;
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+$transition: 300ms ease-in-out;
+
+.counter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
+  border-radius: 12px;
+  border: 2px solid $border;
+  max-width: 600px;
+  margin: 2rem auto;
+  box-shadow: $shadow-md;
+}
+
+.counter-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  h2 {
+    font-size: 2.5rem;
+    color: $text;
+    margin: 0;
+    font-weight: 700;
+    background: linear-gradient(135deg, $primary-light 0%, $success 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  p {
+    font-size: 1.25rem;
+    color: $text;
+    margin: 0;
+    font-weight: 600;
+    
+    span {
+      background: linear-gradient(135deg, $primary-light 0%, $primary-dark 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+    }
+  }
+}
+
+.counter-value {
+  font-size: 4rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, $primary-light 0%, $primary-dark 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  animation: fadeIn 500ms ease-in-out;
+}
+
+.counter-unit {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, $success 0%, #059669 100%);
+  color: $white;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+}
+
+.counter-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+
+  button {
+    flex: 1;
+    min-width: 120px;
+  }
+}
+
+/* Timer Status Indicator */
+.timer-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: $light;
+  border-radius: 8px;
+  border: 1px solid $border;
+  font-size: 0.95rem;
+  color: $text;
+  font-weight: 600;
+
+  .status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $success;
+    animation: pulse 2s infinite;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .counter-container {
+    padding: 2rem 1.5rem;
+    margin: 1rem;
+  }
+
+  .counter-value {
+    font-size: 3rem;
+  }
+
+  .counter-display h2 {
+    font-size: 1.75rem;
+  }
+
+  .counter-buttons {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+      min-width: auto;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .counter-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .counter-value {
+    font-size: 2.5rem;
+  }
+
+  .counter-display h2 {
+    font-size: 1.5rem;
+  }
+
+  .counter-buttons {
+    gap: 0.5rem;
+  }
+}
