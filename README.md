@@ -32,7 +32,7 @@ src/app/header/
 
 - **Piliers du Angular moderne**: TypeScript, Standalone components, structure standardisée.
 
--**Les hooks** : Méthodes appelées automatiquement à différentes moments du cycle de vie d'un composant
+- **Les hooks** : Méthodes appelées automatiquement à différentes moments du cycle de vie d'un composant
 |Hook  |	Quand ?|	Usage|
 |:-----|:--------------|:------------|
 |ngOnInit()	|Après création du composant	|Initialisation, appels HTTP, abonnements|
@@ -129,11 +129,24 @@ ng test
 ng test --code-coverage   
 ```
 
+- **Build local**: 
+```
+ng build --configuration production
+npx serve dist/nom-du-projet
+```
+
+- **Sur GitHub Pages**:
+```
+ng build --configuration production --base-href /nom-du-repo/
+
+npx angular-cli-ghpages --dir dist/nom-du-projet/browser -> <browser> dépend de la version d'Anguler ! 
+```
+
 ## Definitions
 
 - **SPA** : Single Page Application, application reposant sur un chanrgement de page unique, dont lala vue se met à jour coté client. Permet une navigation plus fluide, une modularité du code permettant une réutilisation des composants et de limiter les aller-retours coté serveur.
 
--**Programmation réactive** : Un programme réagitautomatiquement aux changements de données ou d'évennements au lieu de les interroger activeùent.
+- **Programmation réactive** : Un programme réagitautomatiquement aux changements de données ou d'évennements au lieu de les interroger activeùent.
 ```
 Le service fournit les données sous forme de flux --> Le composant s'abonne à ces données, pour être notifié à chaque changement -> Le template affiche automatiquement la dernière valeur reçue grâce au | async
 ```
@@ -151,3 +164,7 @@ Le service fournit les données sous forme de flux --> Le composant s'abonne à 
 - **CSRF**: Pousse le navigateur à executer des actions à un utilisateur ayant des droits spécifiques (authentification...) -> Configurer les cookies (SameSite, ), Token CSRF, Vérifier l'origine des requêtes...
 
 - **CSP**: règle de sécurité appliquée par le navigateur pour limiter ce que la page a le droit de charger/exécuter.
+
+- **SSR**: Server-Side Rendering -> Le serveur génère la page à chaque requête -> Très bon pour contenu dynamique
+
+- **Prerender**: Le HTML est généré au moment du build -> Compatible hébergement statique, Très bon pour pages “marketing”, docs...
